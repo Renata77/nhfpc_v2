@@ -1,0 +1,496 @@
+{% extends "components/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    问题详情
+{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'js/multiselect/css/multi-select.css' %}">
+{% endblock %}
+{% block content %}
+    <h2>问题详细描述</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">问题详细</h3>
+                </div>
+                <table class="table-striped table-bordered table-hover table-detail " id="detail_question">
+                    <thead>
+                    <tr>
+                        <th data-field="qid" data-visible="false">问卷简称</th>
+                        <th data-field="tid" data-valign="middle" data-falign="center">问题编号</th>
+                        <th data-field="origin" data-valign="middle" data-falign="center">问题原始描述</th>
+                        <th data-field="helper" data-valign="middle" data-falign="center" data-editable="true">问题统计主题
+                        </th>
+                        <th data-field="d_type" data-valign="middle" data-falign="center">问题类型</th>
+                        <th data-field="options" data-valign="middle" data-falign="center">选项</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel panel-default select_table"style="display: none">
+                <div class="panel-heading">
+                    <h3 class="panel-title">选项的归类</h3>
+                    <div class="panel-options">
+                        <a href="javascript:;"
+                           onclick="jQuery('#modal-options-description').modal('show', {backdrop: 'fade'});"
+                           class="btn  btn-single">新建</a>
+                        <a href="#"
+                           id="options-descrption-remove"
+                           class="btn  btn-single">删除</a>
+                    </div>
+                </div>
+
+                <table class="table table-striped" id="options_description" >
+                    <thead>
+                    <tr>
+                        <th data-field="state" data-checkbox="true"></th>
+                        <th data-field="description" data-valign="middle" data-falign="center" data-editable="true">所属类别</th>
+                        <th data-field="options" data-valign="middle" data-falign="center">问题选项</th>
+                        <th data-field="qid" data-visible="false"></th>
+                        <th data-field="tid" data-visible="false"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel panel-default segment_table" style="display: none">
+                <div class="panel-heading">
+                    <h3 class="panel-title">填空的区间</h3>
+                    <div class="panel-options">
+                        <a href="javascript:;"
+                           onclick="jQuery('#modal-options-segment').modal('show', {backdrop: 'fade'});"
+                           class="btn  btn-single">新建</a>
+                        <a href="#"
+                           id="options-segment-remove"
+                           class="btn  btn-single">删除</a>
+                    </div>
+                </div>
+
+                <table class="table table-striped" id="options_segment">
+                    <thead>
+                    <tr>
+                        <th data-field="state" data-checkbox="true"></th>
+                        <th data-field="description" data-valign="middle" data-falign="center" data-visible="false"></th>
+                        <th data-field="options" data-valign="middle" data-falign="center" data-editable="true">答案区间</th>
+                        <th data-field="qid" data-visible="false"></th>
+                        <th data-field="tid" data-visible="false"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel panel-default" >
+                <div class="panel-heading">
+                    <h3 class="panel-title">填报详细</h3>
+
+                </div>
+                <table class="table-striped table-bordered table-hover table-detail " id="detail_answer"
+                       data-pagination="true">
+                    <thead>
+                    <tr>
+                        <th data-field="id" data-visible="false">记录id</th>
+                        <th data-field="organ_name" data-align="center">填写单位</th>
+                        <th data-field="organ_level" data-align="center" data-sortable="true">单位信息</th>
+                        <th data-field="gather_level" data-align="center" data-sortable="true">医院级别</th>
+                        <th data-field="origin_options" data-align="center" data-sortable="true">原始填报</th>
+                        <th data-field="options" data-align="center" data-editable="true">处理后</th>
+                        <th data-field="options_stat" data-align="center" data-editable="true">统计值</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel panel-default hospital_table" style="display: none">
+                <div class="panel-heading">
+                    <h3 class="panel-title">填报统计-医院填报情况（数据根据规则计算，可能耗时较长，请耐心等待）</h3>
+                </div>
+                <table class="table-striped table-bordered table-hover table-detail " id="stat_answer_hospital">
+                </table>
+            </div>
+            <div class="panel panel-default hospital_bar" style="display: none">
+                <div class="panel-heading">
+                    <h3 class="panel-title">可视化-医院填报情况（数据根据规则计算，可能耗时较长，请耐心等待）（柱形图）</h3>
+                </div>
+                <div class="hospital_bar"></div>
+            </div>
+            <div class="panel panel-default hospital_chart" style="display: none">
+                <div class="panel-heading">
+                    <h3 class="panel-title">可视化-医院填报情况（数据根据规则计算，可能耗时较长，请耐心等待）（地图）</h3>
+                </div>
+                <div class="hospital_chart"></div>
+            </div>
+            <div class="panel panel-default hospital_word_cloud" style="display: none">
+                <div class="panel-heading">
+                    <h3 class="panel-title">可视化-卫计委填报情况（数据根据规则计算，可能耗时较长，请耐心等待）（词云）</h3>
+                </div>
+                <div class="hospital_word_cloud"></div>
+            </div>
+
+            <div class="panel panel-default health_table" style="display: none">
+                <div class="panel-heading">
+                    <h3 class="panel-title">填报统计-卫计委填报情况（数据根据规则计算，可能耗时较长，请耐心等待）</h3>
+
+                </div>
+                <table class="table-striped table-bordered table-hover table-detail " id="stat_answer_health">
+                </table>
+            </div>
+            <div class="panel panel-default health_bar" style="display: none">
+                <div class="panel-heading">
+                    <h3 class="panel-title">可视化-卫计委填报情况（数据根据规则计算，可能耗时较长，请耐心等待）(柱形图)</h3>
+                </div>
+                <div class="health_bar"></div>
+            </div>
+            <div class="panel panel-default health_chart" style="display: none">
+                <div class="panel-heading">
+                    <h3 class="panel-title">可视化-卫计委填报情况（数据根据规则计算，可能耗时较长，请耐心等待）（地图）</h3>
+                </div>
+                <div class="health_chart"></div>
+            </div>
+            <div class="panel panel-default health_word_cloud" style="display: none">
+                <div class="panel-heading">
+                    <h3 class="panel-title">可视化-卫计委填报情况（数据根据规则计算，可能耗时较长，请耐心等待）（词云）</h3>
+                </div>
+                <div class="health_word_cloud"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block modal %}
+    <div class="modal fade" id="modal-options-description">
+        <div class="modal-dialog" style="width: 60%;" id="contact_dialog">
+            {#            <form class="modal-content" method="post" action="{% url 'dashboard:create_options_description' %}">#}
+            <form class="modal-content" name="options_description" id="description"
+                  action="{% url 'dashboard:create_options_description' %}">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">新建选项描述</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+
+
+                        <div class="col-md-12">
+
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type=hidden name="qid" value={{ qid }}>
+                                <input type=hidden name="tid" value={{ tid }}>
+                                <input type=hidden name="p_type" value={{ p_type }}>
+                                <label for="field-1" class="control-label">{{ question }}<br>选项描述</label>
+                                <input type="text" class="form-control" placeholder="未建设" name="description">
+                            </div>
+                            <script type="text/javascript">
+                                jQuery(document).ready(function ($) {
+                                    $("#multi-select").multiSelect({
+                                        afterInit: function () {
+                                            // Add alternative scrollbar to list
+                                            this.$selectableContainer.add(this.$selectionContainer).find('.ms-list').perfectScrollbar();
+                                        },
+                                        afterSelect: function () {
+                                            // Update scrollbar size
+                                            this.$selectableContainer.add(this.$selectionContainer).find('.ms-list').perfectScrollbar('update');
+                                        }
+                                    });
+                                });
+                            </script>
+                            <select class="form-control" multiple="multiple" id="multi-select" name="options">
+                                {% for opt in option_list %}
+                                    <option value={{ opt }}>{{ opt }}</option>
+                                    {#                                    <option value={{ forloop.counter0 }}:{{ opt }}>{{ opt }}</option>#}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal" id="cancel">取消</button>
+                    <input type="button" class="btn btn-info" id="submitForm_description" value="创建"/>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+    <div class="modal fade" id="modal-options-segment">
+        <div class="modal-dialog" style="width: 60%;" id="contact_dialog">
+            <form class="modal-content" name="options_segment" id="segment"
+                  action="{% url 'dashboard:create_options_description' %}">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">新建数字划分区间</h4>
+                    <h6 class="modal-title">数字类型，使用"；"(英文半角)分割</h6>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type=hidden name="qid" value={{ qid }}>
+                                <input type=hidden name="tid" value={{ tid }}>
+                                <input type=hidden name="p_type" value={{ p_type }}>
+                                <label for="field-1" class="control-label">{{ question }}<br></label>
+                                <input type=hidden name="description" value="segment">
+                                <input type="text" class="form-control" placeholder="3.2；5.8；7.1" name="options">
+                            </div>
+                            <script type="text/javascript">
+                                jQuery(document).ready(function ($) {
+                                    $("#multi-select").multiSelect({
+                                        afterInit: function () {
+                                            // Add alternative scrollbar to list
+                                            this.$selectableContainer.add(this.$selectionContainer).find('.ms-list').perfectScrollbar();
+                                        },
+                                        afterSelect: function () {
+                                            // Update scrollbar size
+                                            this.$selectableContainer.add(this.$selectionContainer).find('.ms-list').perfectScrollbar('update');
+                                        }
+                                    });
+                                });
+                            </script>
+{#                            <select class="form-control" multiple="multiple" id="multi-select" name="options">#}
+{#                                {% for opt in option_list %}#}
+{#                                    <option value={{ opt }}>{{ opt }}</option>#}
+                                    {#                                    <option value={{ forloop.counter0 }}:{{ opt }}>{{ opt }}</option>#}
+{#                                {% endfor %}#}
+{#                            </select>#}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal" id="cancel">取消</button>
+                    <input type="button" class="btn btn-info" id="submitForm_segment" value="创建"/>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+    <div class="modal fade" id="create_message_success" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+
+                    <h4 class="modal-title" id="myModalLabel">
+                        创建描述结果
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    成功！
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        关闭
+                    </button>
+
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+
+    </div><!-- /.create_success_modal -->
+    <div class="modal fade" id="create_message_failed" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+
+                    <h4 class="modal-title" id="myModalLabel">
+                        创建描述结果
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <b style="color: darkred">失败！</b>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        关闭
+                    </button>
+
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+
+    </div><!-- /.create_failed_modal -->
+
+{% endblock %}
+
+{% block script %}
+
+
+    <script src="{% static "js/custom/bootstrap-table.min.js" %}"></script>
+    <script src="{% static "js/custom/bootstrap-table-editable.min.js" %}"></script>
+    <script src="{% static "js/custom/bootstrap-editable.min.js" %}"></script>
+    <script src="{% static "js/custom/bootstrap-table-export.js" %}"></script>
+    <script src="{% static "js/custom/tableExport.js" %}"></script>
+    <script src="{% static "js/custom/bootstrap-table-zh-CN.js" %}"></script>
+    <script src="{% static 'js/custom/detail.js' %}"></script>
+    <script src="{% static 'js/multiselect/js/jquery.multi-select.js' %}"></script>
+
+    <script>
+        console.log('{{ qid }}', '{{ tid }}', '{{ p_type }}');
+
+        $(document).ready(function () {
+
+            $("#description").on("submit", function (e) {
+                var postData = $(this).serializeArray();
+                var formURL = $(this).attr("action");
+                $.ajax({
+                    url: formURL,
+                    type: "POST",
+                    data: postData,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $('#modal-options-description').modal('hide');
+                        // $('#create_message_success').modal('show');
+                        window.location.reload();
+
+                    },
+                    error: function (jqXHR, status, error) {
+                        $('#modal-options-description').modal('hide');
+                        $('#create_message_failed').modal('show');
+
+                    }
+                });
+                e.preventDefault();
+            });
+
+            $("#submitForm_description").on('click', function () {
+                $("#description").submit();
+            });
+            $("#segment").on("submit", function (e) {
+                var postData = $(this).serializeArray();
+                var formURL = $(this).attr("action");
+                $.ajax({
+                    url: formURL,
+                    type: "POST",
+                    data: postData,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $('#modal-options-segment').modal('hide');
+                        // $('#create_message_success').modal('show');
+                        window.location.reload();
+
+                    },
+                    error: function (jqXHR, status, error) {
+                        $('#modal-options-segment').modal('hide');
+                        $('#create_message_failed').modal('show');
+
+                    }
+                });
+                e.preventDefault();
+            });
+
+            $("#submitForm_segment").on('click', function () {
+                $("#segment").submit();
+            });
+        });
+
+        select_items_for_sidebar('#{{ mark }}');
+        var ui_init = {
+            qid: "{{ qid }}",
+            type: "{{ p_type }}"
+        };
+        init_type_ui(ui_init);
+
+        {% autoescape off %}
+            var question = {
+                selector: '#detail_question',
+                data:{{ detail_question }},
+                showExport: false,
+                url: "{% url 'dashboard:update_question_helper' %}"
+            };
+            var description = {
+                selector: "#options_description",
+                data:{{ options_description }},
+                url: "{% url 'dashboard:update_options_description' %}"
+            };
+            var segment = {
+                selector: "#options_segment",
+                data:{{ options_description }},
+                url: "{% url 'dashboard:update_options_segment' %}"
+            };
+            var answer = {
+                selector: '#detail_answer',
+                data:{{ detail_answer }},
+                showExport: true,
+                url: "{% url 'dashboard:update_answer_options' %}"
+            };
+            var stat_hospital = {
+                selector: '#stat_answer_hospital',
+                showExport: true,
+                qid: "{{ qid }}",
+                tid:{{ tid }},
+                helper: "{{ helper }}",
+                p_type:{{ p_type }},
+                url: "{% url 'dashboard:stat_answer_hospital' %}"
+            };
+            var stat_health = {
+                selector: '#stat_answer_health',
+                showExport: true,
+                qid: "{{ qid }}",
+                tid:{{ tid }},
+                helper: "{{ helper }}",
+                p_type:{{ p_type }},
+                url: "{% url 'dashboard:stat_answer_health' %}"
+            };
+        {% endautoescape %}
+        init_update_table(question);
+        init_update_table(description);
+        init_update_table(segment);
+        init_update_table(answer);
+        init_hospital_stat_table(stat_hospital);
+        init_health_stat_table(stat_health);
+        var remove_description = {
+            button: '#options-descrption-remove',
+            table: "#options_description",
+            url: "{% url 'dashboard:delete_options_description' %}"
+        };
+        remove_record_in_table(remove_description);
+        var remove_segment = {
+            button: '#options-segment-remove',
+            table: "#options_segment",
+            url: "{% url 'dashboard:delete_options_description' %}"
+        };
+        remove_record_in_table(remove_segment);
+
+
+
+    </script>
+
+{% endblock %}

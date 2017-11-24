@@ -1,0 +1,33 @@
+/**
+ *
+ * Apply your custom CSS here
+ *
+*/
+
+body {	
+}
+
+a {
+}
+
+/*footer{ position: absolute; bottom: 0; }*/
+
+.title{
+
+    font-size: 16px;
+}
+.dir1{
+    font-size: 18px;
+}
+.dir2{
+    font-size: 16px;
+}
+.dir3{
+    font-size: 14px;
+}
+
+.table-detail{
+    font-size: 16px;
+    /*font-style: inherit;*/
+    font-family: "Microsoft YaHei UI",  serif;
+}

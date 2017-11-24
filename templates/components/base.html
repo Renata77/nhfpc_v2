@@ -1,0 +1,1965 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Xenon Boostrap Admin Panel"/>
+    <meta name="author" content=""/>
+
+    <title>{% block title %}{% endblock %}</title>
+
+
+    <link rel="stylesheet" href="{% static 'css/fonts/linecons/css/linecons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts/fontawesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-table.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-editable.css' %}">
+    <link rel="stylesheet" href="{% static 'css/xenon-core.css' %}">
+    <link rel="stylesheet" href="{% static 'css/xenon-forms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/xenon-components.css' %}">
+    <link rel="stylesheet" href="{% static 'css/xenon-skins.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}"/>
+    <script src="{% static 'js/custom/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static 'js/custom/bootstrap.min.js' %}"></script>
+    {% block stylesheet %}{% endblock %}
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+
+</head>
+<body class="page-body">
+
+<div class="page-container">
+    <!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
+    <!-- Add "fixed" class to make the sidebar fixed always to the browser viewport. -->
+    <!-- Adding class "toggle-others" will keep only one menu item open at a time. -->
+    <!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
+    <div class="sidebar-menu toggle-others fixed">
+
+        <div class="sidebar-menu-inner">
+
+            <header class="logo-env">
+
+                <!-- logo -->
+                <div class="logo">
+                    <a href="{% url 'dashboard:questionnaires' %}" class="logo-expanded">
+                        <img src="{% static 'images/logo_develop.png' %}" width="250" alt="140"/>
+                    </a>
+
+                    <a href="{% url 'dashboard:questionnaires' %}" class="logo-collapsed">
+                        <img src="{% static "images/logo_develop_collapsed.png" %}" width="80" alt="110"/>
+                    </a>
+                </div>
+
+                <!-- This will toggle the mobile menu and will be visible only on mobile devices -->
+                <div class="mobile-menu-toggle visible-xs">
+{#                    <a href="#" data-toggle="user-info-menu">#}
+{#                        <i class="fa-bell-o"></i>#}
+{#                        <span class="badge badge-success">7</span>#}
+{#                    </a>#}
+
+                    <a href="#" data-toggle="mobile-menu">
+                        <i class="fa-bars"></i>
+                    </a>
+                </div>
+
+
+            </header>
+
+
+            <ul id="main-menu" class="main-menu">
+                <!-- add class "multiple-expanded" to allow multiple submenus to open -->
+                <!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+                <li class="questionnaires">
+                    <a href="{% url 'dashboard:questionnaires' %}">
+                        <i class="fa-book"></i>
+                        <span id="questionnaires" class="title">问卷详情总览</span>
+                    </a>
+                </li>
+                <li class=location>
+                    <a href="#">
+                        <i class="fa-map-marker"></i>
+                        <span class="title">区域人口健康信息化</span>
+                    </a>
+                    <ul>
+                        <li class=location_dir1>
+                            <a href="#">
+                                <span class="dir1">体制机制建设</span>
+                            </a>
+                            <ul>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">基本信息</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 1 %}">
+                                                <span id=location1 class="dir3">机构全称</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 2 %}">
+                                                <span id=location2 class="dir3">组织机构代码</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 3 %}">
+                                                <span id=location3 class="dir3">机构性质</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">组织与管理</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 4 %}">
+                                                <span id=location4 class="dir3">分管信息化的委领导</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 5 %}">
+                                                <span id=location5 class="dir3">成立信息化领导小组</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 6 %}">
+                                                <span id=location6 class="dir3">主管信息化工作的部门</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 7 %}">
+                                                <span id=location7 class="dir3">主管信息化工作的部门有哪些职责</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 8 %}">
+                                                <span id=location8 class="dir3">设置信息中心或具有信息中心职能的部门</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 9 %}">
+                                                <span id=location9 class="dir3">信息化部门编制数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 10 %}">
+                                                <span id=location10 class="dir3">信息化部门编制人数</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 11 %}">
+                                                <span id=location11 class="dir3">信息化部门实有人数</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 12 %}">
+                                                <span id=location12 class="dir3">信息化部门2016年招聘人数</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 13 %}">
+                                                <span id=location13 class="dir3">信息化部门2016年离职人数</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">发展规划</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 14 %}">
+                                                <span id=location14 class="dir3">信息化发展规划制定情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 15 %}">
+                                                <span id=location15 class="dir3">信息化规划过程中“一把手”参与程度</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 16 %}">
+                                                <span id=location16 class="dir3">规划制定过程中各业务部门参与程度</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 17 %}">
+                                                <span id=location17 class="dir3">信息化预算的制定情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 18 %}">
+                                                <span id=location18 class="dir3">2011年-2015年信息化建设总投入/万元</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 19 %}">
+                                                <span id=location19 class="dir3">2016年信息化建设总投入/万元</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 20 %}">
+                                                <span id=location20 class="dir3">信息化建设投入资金情况资金来源</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=location_dir1>
+                            <a href="#">
+                                <span class="dir1">基础设施建设</span>
+                            </a>
+                            <ul>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">机房建设情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 21 %}">
+                                                <span id=location21 class="dir3">数据中心建设模式</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 22 %}">
+                                                <span id=location22 class="dir3">机房建设面积</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 23 %}">
+                                                <span id=location23 class="dir3">机房设备总功耗</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 24 %}">
+                                                <span id=location24 class="dir3">双电源输入</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 25 %}">
+                                                <span id=location25 class="dir3">机房UPS冗余设计</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 26 %}">
+                                                <span id=location26 class="dir3">机房空调冗余设计情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 27 %}">
+                                                <span id=location27 class="dir3">机房集中监控统一管理的建设情况</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">网络建设情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 28 %}">
+                                                <span id=location28 class="dir3">内外网设备隔离模式</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 29 %}">
+                                                <span id=location29 class="dir3">内外网通信模式</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 30 %}">
+                                                <span id=location30 class="dir3">内网数据中心带宽</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 31 %}">
+                                                <span id=location31 class="dir3">内网设备可靠性</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 32 %}">
+                                                <span id=location32 class="dir3">外网数据中心带宽</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 33 %}">
+                                                <span id=location33 class="dir3">外网设备可靠性</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 34 %}">
+                                                <span id=location34 class="dir3">数据网络架构</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 35 %}">
+                                                <span id=location35 class="dir3">专网建设,广域网互联</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 36 %}">
+                                                <span id=location36 class="dir3">专网建设,广域网带宽</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">计算、存储情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 37 %}">
+                                                <span id=location37 class="dir3">小型机数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 38 %}">
+                                                <span id=location38 class="dir3">存储资源总容量/T</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 39 %}">
+                                                <span id=location39 class="dir3">已使用存储资源容量/T</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 40 %}">
+                                                <span id=location40 class="dir3">存储架构</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 41 %}">
+                                                <span id=location41 class="dir3">信息系统数据存储采用的措施</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 42 %}">
+                                                <span id=location42 class="dir3">应用的虚拟化技术及虚拟化应用的范围</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 43 %}">
+                                                <span id=location43 class="dir3">应用业务云平台</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 44 %}">
+                                                <span id=location44 class="dir3">公有云品牌</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 45 %}">
+                                                <span id=location45 class="dir3">核心数据的备份</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 46 %}">
+                                                <span id=location46 class="dir3">备份介质</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 47 %}">
+                                                <span id=location47 class="dir3">核心数据是否有容灾</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 48 %}">
+                                                <span id=location48 class="dir3">容灾技术</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=location_dir1>
+                            <a href="#">
+                                <span class="dir1">基础数据库建设</span>
+                            </a>
+                            <ul>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">基本情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 49 %}">
+                                                <span id=location49 class="dir3">建设个人主索引库</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 50 %}">
+                                                <span id=location50 class="dir3">个人主索引条数</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 51 %}">
+                                                <span id=location51 class="dir3">实现“以人为核心”的全员人口-健康档案-电子病历整合</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 52 %}">
+                                                <span id=location52 class="dir3">居民访问个人健康信息时身份认证手段</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 53 %}">
+                                                <span id=location53 class="dir3">实现统一的代码标准体系</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 54 %}">
+                                                <span id=location54 class="dir3">实现数据质量管理体系标准</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 55 %}">
+                                                <span id=location55 class="dir3">实现了信息资源目录体系标准</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 56 %}">
+                                                <span id=location56 class="dir3">实现了基于HL7 CDA的文档交换体系标准</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 57 %}">
+                                                <span id=location57 class="dir3">采取隐私保护措施</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 58 %}">
+                                                <span id=location58 class="dir3">建立三大库的授权访问机制</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 59 %}">
+                                                <span id=location59 class="dir3">建设区域影像中心</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 60 %}">
+                                                <span id=location60 class="dir3">影像中心存储量/T</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">全员人口库建设情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 61 %}">
+                                                <span id=location61 class="dir3">建设人口信息库</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 62 %}">
+                                                <span id=location62 class="dir3">人口信息库数据元标准</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 63 %}">
+                                                <span id=location63 class="dir3">数据应用覆盖业务范围</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 64 %}">
+                                                <span id=location64 class="dir3">核心数据库</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 65 %}">
+                                                <span id=location65 class="dir3">目前人口信息库记录人口数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 66 %}">
+                                                <span id=location66 class="dir3">人口信息库常驻人口数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 67 %}">
+                                                <span id=location67 class="dir3">主要数据来源</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 68 %}">
+                                                <span id=location68 class="dir3">数据采集频度</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 69 %}">
+                                                <span id=location69 class="dir3">与公安部门数据比对结果占比</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">电子健康档案库建设情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 70 %}">
+                                                <span id=location70 class="dir3">建设电子健康档案库</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 71 %}">
+                                                <span id=location71 class="dir3">健康档案库遵循哪些数据元标准</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 72 %}">
+                                                <span id=location72 class="dir3">健康档案库的主要数量来源</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 73 %}">
+                                                <span id=location73 class="dir3">健康档案数据采集的频度</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 74 %}">
+                                                <span id=location74 class="dir3">健康档案浏览器使用情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 75 %}">
+                                                <span id=location75 class="dir3">健康档案访问授权方式</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 76 %}">
+                                                <span id=location76 class="dir3">居民健康档案累计数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 77 %}">
+                                                <span id=location77 class="dir3">居民健康档案2016年新增档案数</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 78 %}">
+                                                <span id=location78 class="dir3">居民健康档案建档及档案使用情况：日调阅次数</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 79 %}">
+                                                <span id=location79 class="dir3">居民电子健康档案建档率</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 80 %}">
+                                                <span id=location80 class="dir3">居民电子健康档案更新率</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">电子病历库建设情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 81 %}">
+                                                <span id=location81 class="dir3">建设电子病历库</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 82 %}">
+                                                <span id=location82 class="dir3">电子病历库现存电子病案数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 83 %}">
+                                                <span id=location83 class="dir3">电子病历库电子病案日调阅次数</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 84 %}">
+                                                <span id=location84 class="dir3">电子病历库遵循哪些数据元标准</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 85 %}">
+                                                <span id=location85 class="dir3">住院电子病案首页数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 86 %}">
+                                                <span id=location86 class="dir3">中医住院电子病案首页数量条数</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 87 %}">
+                                                <span id=location87 class="dir3">门诊记录数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 88 %}">
+                                                <span id=location88 class="dir3">电子病历库主要数据来源</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 89 %}">
+                                                <span id=location89 class="dir3">电子病历数据采集频度是</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=location_dir1>
+                            <a href="#">
+                                <span class="dir1">区域平台建设</span>
+                            </a>
+                            <ul>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">总体建设情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 90 %}">
+                                                <span id=location90 class="dir3">开展区域人口健康信息平台建设情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 91 %}">
+                                                <span id=location91 class="dir3">区域人口健康信息平台建设始建时间</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 92 %}">
+                                                <span id=location92 class="dir3">区域人口健康信息平台持续建设期次</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 93 %}">
+                                                <span id=location93 class="dir3">区域人口健康信息平台建设定位</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 94 %}">
+                                                <span id=location94 class="dir3">区域人口健康信息平台依据的建设规范</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 95 %}">
+                                                <span id=location95 class="dir3">区域人口健康信息平台技术架构（SOA体系架构）</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 96 %}">
+                                                <span id=location96 class="dir3">“十三五”期间区域人口健康信息平台建设重点</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">平台基础建设</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 97 %}">
+                                                <span id=location97 class="dir3">平台基础建设情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 98 %}">
+                                                <span id=location98 class="dir3">区域人口健康信息平台建设部署模式</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 99 %}">
+                                                <span id=location99 class="dir3">下级平台接入数量或下级平台建成数量</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">互联互通情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 100 %}">
+                                                <span id=location100 class="dir3">实现互联互通的应用系统/业务平台中公共卫生类的数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 101 %}">
+                                                <span id=location101 class="dir3">实现互联互通的应用系统/业务平台中医疗服务类的数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 102 %}">
+                                                <span id=location102 class="dir3">实现互联互通的应用系统/业务平台中医疗保障类的数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 103 %}">
+                                                <span id=location103 class="dir3">互联互通的应用系统/业务平台中药品管理类的数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 104 %}">
+                                                <span id=location104 class="dir3">实现互联互通的应用系统/业务平台中计划生育类的数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 105 %}">
+                                                <span id=location105 class="dir3">实现互联互通的应用系统/业务平台中综合管理类的数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 106 %}">
+                                                <span id=location106 class="dir3">平台直接支持条线开展跨地区业务</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 107 %}">
+                                                <span id=location107 class="dir3">实现与区域外部门互通情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 108 %}">
+                                                <span id=location108 class="dir3">与区域外部门互通方式</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 109 %}">
+                                                <span id=location109 class="dir3">参加区域平台信息互联互通标准化成熟度测评情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 110 %}">
+                                                <span id=location110 class="dir3">参加区域平台信息互联互通标准化成熟度测评时间</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">数据交换情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 111 %}">
+                                                <span id=location111 class="dir3">支持统一数据采集和业务应用共享</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 112 %}">
+                                                <span id=location112 class="dir3">支持的数据交换方式</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 113 %}">
+                                                <span id=location113 class="dir3">支持的可交换数据类型</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 114 %}">
+                                                <span id=location114 class="dir3">数据交换体系前端建设</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 115 %}">
+                                                <span id=location115 class="dir3">采用《卫生信息共享文档规范》作为文档交换的数据标准</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 116 %}">
+                                                <span id=location116 class="dir3">建设基于量化指标的数据采集质量评估分析系统</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=location_dir1>
+                            <a href="#">
+                                <span class="dir1">业务应用建设</span>
+                            </a>
+                            <ul>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">惠民服务</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 117 %}">
+                                                <span id=location117 class="dir3">惠民服务建设情况</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">业务协同</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 118 %}">
+                                                <span id=location118 class="dir3">业务协同建设情况</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">业务监管</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 119 %}">
+                                                <span id=location119 class="dir3">业务监管建设情况</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">居民健康卡应用情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 121 %}">
+                                                <span id=location121 class="dir3">居民健康卡发放情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 122 %}">
+                                                <span id=location122 class="dir3">累计居民健康卡已发放数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 123 %}">
+                                                <span id=location123 class="dir3">区域内居民健康卡发卡模式</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 124 %}">
+                                                <span id=location124 class="dir3">健康卡承载本地居民健康的应用</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=location_dir1>
+                            <a href="#">
+                                <span class="dir1">信息安全与标准</span>
+                            </a>
+                            <ul>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">等级保护与安全测评情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 125 %}">
+                                                <span id=location125 class="dir3">实施信息安全等级保护测评</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">信息安全管理情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 126 %}">
+                                                <span id=location126 class="dir3">建立信息安全管理制度</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 127 %}">
+                                                <span id=location127 class="dir3">部署安全防护设备</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 128 %}">
+                                                <span id=location128 class="dir3">信息系统应用身份鉴别采用了哪些措施</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 129 %}">
+                                                <span id=location129 class="dir3">信息系统数据安全采用了哪些措施</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">信息安全技术防护手段建设情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 130 %}">
+                                                <span id=location130 class="dir3">建立了基于数字证书的信息安全体系标准</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 131 %}">
+                                                <span id=location131 class="dir3">建立的信息系统应急预案</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">运维和信息安全服务情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 132 %}">
+                                                <span id=location132 class="dir3">信息系统运维方式</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">标准体系建设</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 133 %}">
+                                                <span id=location133 class="dir3">建设标准规范管理信息系统</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 134 %}">
+                                                <span id=location134 class="dir3">颁布标准发布流程和管理文件</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 135 %}">
+                                                <span id=location135 class="dir3">发布信息标准中基础类标准的数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 136 %}">
+                                                <span id=location136 class="dir3">发布信息标准中数据类标准的数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 137 %}">
+                                                <span id=location137 class="dir3">发布信息标准中技术类标准的数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 138 %}">
+                                                <span id=location138 class="dir3">发布信息标准中管理类标准的数量</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=location_dir1>
+                            <a href="#">
+                                <span class="dir1">其他</span>
+                            </a>
+                            <ul>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">问题与难点</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 139 %}">
+                                                <span id=location139 class="dir3">在推进医院信息化建设的主要障碍</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=location_dir2">
+                                    <a href="#">
+                                        <span class="dir2">优秀案例征集</span>
+                                    </a>
+                                    <ul>
+                                        <li class=location_dir3>
+                                            <a href="{% url 'dashboard:visualization' "location" 140 %}">
+                                                <span id=location140 class="dir3">信息化建设优秀案例上报案例数</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class=bigdata>
+                    <a href="#">
+                        <i class="fa-database"></i>
+                        <span class="title">医疗健康大数据</span>
+                    </a>
+                    <ul>
+
+                        <li class=bigdata_dir1>
+                            <a href="#">
+                                <span class="dir1">医疗健康大数据业务应用</span>
+                            </a>
+                            <ul>
+                                <li class=bigdata_dir2">
+                                    <a href="#">
+                                        <span class="dir2">医疗健康大数据业务应用</span>
+                                    </a>
+                                    <ul>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 1 %}">
+                                                <span id=bigdata1 class="dir3">开展医疗健康大数据方面的应用</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 2 %}">
+                                                <span id=bigdata2 class="dir3">医疗健康大数据方面最有价值的应用</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 3 %}">
+                                                <span id=bigdata3 class="dir3">医疗健康大数据方面的应用类别</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 4 %}">
+                                                <span id=bigdata4 class="dir3">医疗健康大数据方面的具体应用</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 5 %}">
+                                                <span id=bigdata5 class="dir3">医疗健康大数据方面下一步最希望实施的应用</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=bigdata_dir1>
+                            <a href="#">
+                                <span class="dir1">医疗健康大数据信息资源</span>
+                            </a>
+                            <ul>
+                                <li class=bigdata_dir2">
+                                    <a href="#">
+                                        <span class="dir2">医疗健康大数据信息资源</span>
+                                    </a>
+                                    <ul>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 6 %}">
+                                                <span id=bigdata6 class="dir3">未来三年医疗健康大数据量:结构化数据</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 7 %}">
+                                                <span id=bigdata7 class="dir3">未来三年医疗健康大数据量:半结构化病历数据</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 8 %}">
+                                                <span id=bigdata8 class="dir3">未来三年医疗健康大数据量:影像数据</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 9 %}">
+                                                <span id=bigdata9 class="dir3">未来三年医疗健康大数据量:生物组学数据</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 10 %}">
+                                                <span id=bigdata10 class="dir3">已有医疗健康数据</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 11 %}">
+                                                <span id=bigdata11 class="dir3">已有医疗大数据应用处理的数据类型</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 12 %}">
+                                                <span id=bigdata12 class="dir3">已有医疗大数据和其它机构共享数据</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=bigdata_dir1>
+                            <a href="#">
+                                <span class="dir1">医疗健康大数据技术方面</span>
+                            </a>
+                            <ul>
+                                <li class=bigdata_dir2">
+                                    <a href="#">
+                                        <span class="dir2">医疗健康大数据技术方面</span>
+                                    </a>
+                                    <ul>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 13 %}">
+                                                <span id=bigdata13 class="dir3">医疗已建立信息集成平台</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 14 %}">
+                                                <span id=bigdata14 class="dir3">医疗已建立临床数据中心CDR</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 15 %}">
+                                                <span id=bigdata15 class="dir3">医疗已建立大数据分析用的数据仓库或数据集市</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 16 %}">
+                                                <span id=bigdata16 class="dir3">医疗大数据分析平台数据库</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 17 %}">
+                                                <span id=bigdata17 class="dir3">完成一次医疗健康大数据课题相关的数据提取所花费周期</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 18 %}">
+                                                <span id=bigdata18 class="dir3">完成一次医疗健康大数据课题分析所花费周期</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 19 %}">
+                                                <span id=bigdata19 class="dir3">了解大数据平台Hadoop</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 20 %}">
+                                                <span id=bigdata20 class="dir3">未来1~2年内建立临床数据中心CDR</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 21 %}">
+                                                <span id=bigdata21 class="dir3">未来1~2年内大数据技术进行整合提供更好的服务</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 22 %}">
+                                                <span id=bigdata22 class="dir3">进行医疗健康大数据课题相关的数据提取，处理数据类型</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 23 %}">
+                                                <span id=bigdata23 class="dir3">医疗健康大数据课题数据提取存在的问题</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 24 %}">
+                                                <span id=bigdata24 class="dir3">目前医疗健康大数据分析工具</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 25 %}">
+                                                <span id=bigdata25 class="dir3">医疗健康大数据课题分析存在的问题</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=bigdata_dir1>
+                            <a href="#">
+                                <span class="dir1">医疗健康大数据问题方面</span>
+                            </a>
+                            <ul>
+                                <li class=bigdata_dir2">
+                                    <a href="#">
+                                        <span class="dir2">医疗健康大数据问题方面</span>
+                                    </a>
+                                    <ul>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 26 %}">
+                                                <span id=bigdata26 class="dir3">贵机构对医疗健康大数据的发展与落地的建议</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 27 %}">
+                                                <span id=bigdata27 class="dir3">医疗健康大数据应用方面存在的问题</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 28 %}">
+                                                <span id=bigdata28 class="dir3">落实医疗大数据的应用需要解决的最重要的因素</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 29 %}">
+                                                <span id=bigdata29 class="dir3">医疗健康大数据应用方面希望获取帮助</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=bigdata_dir1>
+                            <a href="#">
+                                <span class="dir1">医疗健康大数据其它方面</span>
+                            </a>
+                            <ul>
+                                <li class=bigdata_dir2">
+                                    <a href="#">
+                                        <span class="dir2">医疗健康大数据其它方面</span>
+                                    </a>
+                                    <ul>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 30 %}">
+                                                <span id=bigdata30 class="dir3">有医疗健康大数据服务部门</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 31 %}">
+                                                <span id=bigdata31 class="dir3">医疗健康大数据服务部门人员数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=bigdata_dir3>
+                                            <a href="{% url 'dashboard:visualization' "bigdata" 32 %}">
+                                                <span id=bigdata32 class="dir3">医疗健康大数据服务部门人员专业构成</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class=hospital>
+                    <a href="#">
+                        <i class="fa-h-square"></i>
+                        <span class="title">医院信息化</span>
+                    </a>
+                    <ul>
+
+                        <li class=hospital_dir1>
+                            <a href="#">
+                                <span class="dir1">组织管理</span>
+                            </a>
+                            <ul>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">医院基本情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 1 %}">
+                                                <span id=hospital1 class="dir3">医院全称</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 2 %}">
+                                                <span id=hospital2 class="dir3">组织机构代码</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 3 %}">
+                                                <span id=hospital3 class="dir3">所在省、自治区、直辖市</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 4 %}">
+                                                <span id=hospital4 class="dir3">医院类别</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 5 %}">
+                                                <span id=hospital5 class="dir3">公立医院隶属关系</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 6 %}">
+                                                <span id=hospital6 class="dir3">期末实有床位数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 7 %}">
+                                                <span id=hospital7 class="dir3">期末实际在岗职工数</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 8 %}">
+                                                <span id=hospital8 class="dir3">2016年总诊疗人次</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 9 %}">
+                                                <span id=hospital9 class="dir3">2016年出院人数</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 10 %}">
+                                                <span id=hospital10 class="dir3">2016年业务总收入/万元</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 11 %}">
+                                                <span id=hospital11 class="dir3">2016年业务总支出/万元</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 12 %}">
+                                                <span id=hospital12 class="dir3">2011-2015年信息化建设总支出/万元</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 13 %}">
+                                                <span id=hospital13 class="dir3">2016年信息化建设总支出/万元</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 14 %}">
+                                                <span id=hospital14 class="dir3">医院信息化建设投入资金情况资金来源</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">组织管理</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 15 %}">
+                                                <span id=hospital15 class="dir3">医院信息化工作的主管部门</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 16 %}">
+                                                <span id=hospital16 class="dir3">医院信息化工作的主管部门负责的工作内容</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 17 %}">
+                                                <span id=hospital17 class="dir3">信息化部门编制数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 18 %}">
+                                                <span id=hospital18 class="dir3">信息化部门编制人数</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 19 %}">
+                                                <span id=hospital19 class="dir3">信息化部门实有人数</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 20 %}">
+                                                <span id=hospital20 class="dir3">信息化部门2016年招聘人数</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 21 %}">
+                                                <span id=hospital21 class="dir3">信息化部门2016年离职人数</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 22 %}">
+                                                <span id=hospital22 class="dir3">本单位的信息化工作人员数量是否满足现有应用需要</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=hospital_dir1>
+                            <a href="#">
+                                <span class="dir1">基础设施</span>
+                            </a>
+                            <ul>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">网络建设情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 23 %}">
+                                                <span id=hospital23 class="dir3">内外网设备隔离</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 24 %}">
+                                                <span id=hospital24 class="dir3">内外网通信方案</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 25 %}">
+                                                <span id=hospital25 class="dir3">内网数据中心带宽</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 26 %}">
+                                                <span id=hospital26 class="dir3">内网园区网络带宽</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 27 %}">
+                                                <span id=hospital27 class="dir3">内网设备可靠性</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 28 %}">
+                                                <span id=hospital28 class="dir3">外网数据中心带宽</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 29 %}">
+                                                <span id=hospital29 class="dir3">外网园区网络带宽</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 30 %}">
+                                                <span id=hospital30 class="dir3">外网设备可靠性</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 31 %}">
+                                                <span id=hospital31 class="dir3">无线网络</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 32 %}">
+                                                <span id=hospital32 class="dir3">无线网络业务</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 33 %}">
+                                                <span id=hospital33 class="dir3">物联网架构</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 34 %}">
+                                                <span id=hospital34 class="dir3">数据网络架构</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">机房建设情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 35 %}">
+                                                <span id=hospital35 class="dir3">数据中心建设模式</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 36 %}">
+                                                <span id=hospital36 class="dir3">机房面积</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 37 %}">
+                                                <span id=hospital37 class="dir3">机房设备总功耗多大</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 38 %}">
+                                                <span id=hospital38 class="dir3">电源输入的双电源</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 39 %}">
+                                                <span id=hospital39 class="dir3">机房UPS是否需要冗余设计</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 40 %}">
+                                                <span id=hospital40 class="dir3">机房空调的冗余设计</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 41 %}">
+                                                <span id=hospital41 class="dir3">机房集中监控统一管理来降低运维成本</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">计算、存储情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 42 %}">
+                                                <span id=hospital42 class="dir3">小型机数量</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 43 %}">
+                                                <span id=hospital43 class="dir3">存储资源总容量/T</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 44 %}">
+                                                <span id=hospital44 class="dir3">已使用存储容量/T</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 45 %}">
+                                                <span id=hospital45 class="dir3">存储架构</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 46 %}">
+                                                <span id=hospital46 class="dir3">信息系统数据存储采用的措施</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 47 %}">
+                                                <span id=hospital47 class="dir3">应用虚拟化技术以及虚拟化应用的范围</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 48 %}">
+                                                <span id=hospital48 class="dir3">医院有无应用医疗业务云平台</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 49 %}">
+                                                <span id=hospital49 class="dir3">公有云品牌</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 50 %}">
+                                                <span id=hospital50 class="dir3">核心数据的备份</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 51 %}">
+                                                <span id=hospital51 class="dir3">备份介质</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 52 %}">
+                                                <span id=hospital52 class="dir3">核心数据容灾</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 53 %}">
+                                                <span id=hospital53 class="dir3">容灾技术</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=hospital_dir1>
+                            <a href="#">
+                                <span class="dir1">平台建设</span>
+                            </a>
+                            <ul>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">信息平台建设</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 54 %}">
+                                                <span id=hospital54 class="dir3">信息平台基础建设情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 55 %}">
+                                                <span id=hospital55 class="dir3">采用医院信息平台及解决的问题</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">CDR建设</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 56 %}">
+                                                <span id=hospital56 class="dir3">临床数据中心CDR提供的基础服务</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 57 %}">
+                                                <span id=hospital57 class="dir3">信息系统中全院统一的病人主索引</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 58 %}">
+                                                <span id=hospital58 class="dir3">信息系统中患者身份识别方面情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 59 %}">
+                                                <span id=hospital59 class="dir3">临床数据中心CDR采用的安全技术</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=hospital_dir1>
+                            <a href="#">
+                                <span class="dir1">应用系统建设</span>
+                            </a>
+                            <ul>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">业务应用信息化建设</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 60 %}">
+                                                <span id=hospital60 class="dir3">惠民服务建设情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 61 %}">
+                                                <span id=hospital61 class="dir3">医疗业务建设情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 62 %}">
+                                                <span id=hospital62 class="dir3">医疗业务建设情况题</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 63 %}">
+                                                <span id=hospital63 class="dir3">医疗管理建设情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 64 %}">
+                                                <span id=hospital64 class="dir3">运营管理建设情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 65 %}">
+                                                <span id=hospital65 class="dir3">医疗协同建设情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 66 %}">
+                                                <span id=hospital66 class="dir3">数据应用建设情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 67 %}">
+                                                <span id=hospital67 class="dir3">移动医疗建设情况</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">互联互通情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 68 %}">
+                                                <span id=hospital68 class="dir3">分院或社区医院的信息系统一体化</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 69 %}">
+                                                <span id=hospital69 class="dir3">与当地区域人口健康信息平台互联互通、信息共享</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 70 %}">
+                                                <span id=hospital70 class="dir3">医疗机构与社区医院间进行的数据共享</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 71 %}">
+                                                <span id=hospital71 class="dir3">医院运营的信息系统对医院解决问题提供的主要帮助</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=hospital_dir1>
+                            <a href="#">
+                                <span class="dir1">信息安全与标准化</span>
+                            </a>
+                            <ul>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">等级保护与安全测评情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 72 %}">
+                                                <span id=hospital72 class="dir3">信息安全建设情况</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 73 %}">
+                                                <span id=hospital73 class="dir3">实施信息安全等级保护测评</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">信息安全管理情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 74 %}">
+                                                <span id=hospital74 class="dir3">建立信息安全管理制度</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 75 %}">
+                                                <span id=hospital75 class="dir3">部署的安全防护设备</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 76 %}">
+                                                <span id=hospital76 class="dir3">信息系统应用身份鉴别采用的措施</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 77 %}">
+                                                <span id=hospital77 class="dir3">信息系统数据安全采用的措施</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">信息安全技术防护手段建设情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 78 %}">
+                                                <span id=hospital78 class="dir3">建立了基于数字证书的信息安全体系标准</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 79 %}">
+                                                <span id=hospital79 class="dir3">建立的信息系统应急预案</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">运维和信息安全服务情况</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 80 %}">
+                                                <span id=hospital80 class="dir3">医院信息系统运维方式</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">规范化、标准化建设</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 81 %}">
+                                                <span id=hospital81 class="dir3">制定了全面的信息化发展规划</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 82 %}">
+                                                <span id=hospital82 class="dir3">信息系统建设中已经采用的信息化标准体系</span>
+                                            </a>
+                                        </li>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 83 %}">
+                                                <span id=hospital83 class="dir3">信息系统中是否已经采用了统一的信息编码体系</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=hospital_dir1>
+                            <a href="#">
+                                <span class="dir1">其他</span>
+                            </a>
+                            <ul>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">问题与难点</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 84 %}">
+                                                <span id=hospital84 class="dir3">在推进医院信息化建设的主要障碍</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=hospital_dir2">
+                                    <a href="#">
+                                        <span class="dir2">优秀案例征集</span>
+                                    </a>
+                                    <ul>
+                                        <li class=hospital_dir3>
+                                            <a href="{% url 'dashboard:visualization' "hospital" 85 %}">
+                                                <span id=hospital85 class="dir3">信息化建设优秀案例上报案例数</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="extra">
+                    <a href="{% url 'dashboard:extra' %}">
+                        <i class="fa-hospital-o"></i>
+                        <span id="extra" class="title">占比部分</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="main-content">
+
+        <!-- User Info, Notifications and Menu Bar -->
+        <nav class="navbar user-info-navbar" role="navigation">
+
+            <!-- Left links for user info navbar -->
+            <ul class="user-info-menu left-links list-inline list-unstyled">
+
+                <li class="hidden-sm hidden-xs">
+                    <a href="#" data-toggle="sidebar">
+                        <i class="fa-bars"></i>
+                    </a>
+                </li>
+            </ul>
+
+
+            <!-- Right links for user info navbar -->
+            <ul class="user-info-menu right-links list-inline list-unstyled">
+
+                <li class="dropdown user-profile">
+                    <a href="#" data-toggle="dropdown">
+                        <img src="{% static 'images/user-develop.png' %}" alt="user-image"
+                             class="img-circle img-inline userpic-32"
+                             width="28"/>
+                        <span>
+                                {{ request.user }}
+
+                            <i class="fa-angle-down"></i>
+							</span>
+                    </a>
+
+                    <ul class="dropdown-menu user-profile-menu list-unstyled">
+                        <li class="last">
+                            <a href="{% url 'dashboard:logout' %}">
+                                <i class="fa-lock"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+
+        </nav>
+
+
+
+
+
+
+
+        {% block content %}{% endblock %}
+
+        <!-- Main Footer -->
+        <!-- Choose between footer styles: "footer-type-1" or "footer-type-2" -->
+        <!-- Add class "sticky" to  always stick the footer to the end of page (if page contents is small) -->
+        <!-- Or class "fixed" to  always fix the footer to the end of page -->
+        <footer class="main-footer sticky footer-type-1">
+
+            <div class="footer-inner">
+
+                <!-- Add your copyright text here -->
+                <div class="footer-text">
+                    &copy; 2017 国家卫生与计生委成效调查
+                </div>
+
+
+                <!-- Go to Top Link, just add rel="go-top" to any link to add this functionality -->
+                <div class="go-up">
+
+                    <a href="#" rel="go-top">
+                        <i class="fa-angle-up"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </footer>
+    </div>
+
+
+</div>
+{% block modal %}{% endblock %}
+
+
+<!-- Bottom Scripts -->
+
+<script src="{% static 'js/TweenMax.min.js' %}"></script>
+<script src="{% static 'js/resizeable.js' %}"></script>
+<script src="{% static 'js/joinable.js' %}"></script>
+<script src="{% static 'js/xenon-api.js' %}"></script>
+<script src="{% static 'js/xenon-toggles.js' %}"></script>
+
+
+<!-- Imported scripts on this page -->
+<script src="{% static 'js/xenon-widgets.js' %}"></script>
+<script src="{% static 'js/devexpress-web-14.1/js/globalize.min.js' %}"></script>
+{#<script src="{% static 'js/devexpress-web-14.1/js/dx.chartjs.js' %}"></script>#}
+<script src="{% static 'js/toastr/toastr.min.js' %}"></script>
+
+
+<!-- JavaScripts initializations and stuff -->
+<script src="{% static 'js/xenon-custom.js' %}"></script>
+
+<script src="{% static 'js/custom/base.js' %}"></script>
+{% block script %}{% endblock %}
+
+</body>
+</html>

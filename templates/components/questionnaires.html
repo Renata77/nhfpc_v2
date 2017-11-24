@@ -1,0 +1,58 @@
+{% extends "components/base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">问卷详细</h3>
+            </div>
+            <ul id="myTab" class="nav nav-tabs">
+                {% for id,info in  questionnaires_list.items %}
+                    {% if id == '36d06675-d061-4a1c-93df-1718fd267fff' %}
+                        <li class="active">
+                            {% else %}
+                        <li>
+                    {% endif %}
+                <a href="#{{ id }}" data-toggle="tab"  class="table-striped table-bordered table-hover table-detail">{{ info.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+                {% for id,info in questionnaires_list.items %}
+                    {% if id == '36d06675-d061-4a1c-93df-1718fd267fff' %}
+                        <div id={{ id }} class="tab-pane fade in active">
+                    {% else %}
+                        <div id={{ id }} class="tab-pane fade">
+                    {% endif %}
+                    <table id={{ id }} data-toggle="table" class="table-striped table-bordered table-hover table-detail"
+{#                           data-detail-view="true"#}
+{#                           data-detail-formatter="detail is designing"#}
+                           data-url="{% url 'dashboard:data' %}?id={{ id }}"
+                    >
+                        <thead>
+                        <tr>
+                            <th data-field="id">序号</th>
+                            <th data-field="first_dir">一级目录</th>
+                            <th data-field="second_dir">二级目录</th>
+                            <th data-field="stem">题干</th>
+                            <th data-field="type">类型</th>
+                            <th data-field="options">选项/填空</th>
+                        </tr>
+                        </thead>
+                    </table>
+            </div>
+                {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="{% static "js/custom/bootstrap-table.min.js" %}"></script>
+    <script src="{% static "js/custom/bootstrap-table-editable.min.js" %}"></script>
+    <script src="{% static "js/custom/bootstrap-editable.min.js" %}"></script>
+    <script src="{% static "js/custom/bootstrap-table-export.js" %}"></script>
+    <script src="{% static "js/custom/tableExport.js" %}"></script>
+    <script src="{% static "js/custom/bootstrap-table-zh-CN.js" %}"></script>
+    <script src="{% static 'js/custom/questionnaire.js' %}"></script>
+{% endblock %}

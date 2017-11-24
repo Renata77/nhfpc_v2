@@ -1,0 +1,431 @@
+{% extends "components/base.html" %}
+{% load staticfiles %}
+{% block title %}
+    额外表单
+
+{% endblock %}
+{% block content %}
+    <div class="panel panel-default segment_table">
+        <div class="panel-heading">
+            <h3 class="panel-title">信息化投入比统计区间</h3>
+            <div class="panel-options">
+                <a href="javascript:;"
+                   onclick="jQuery('#modal-options-segment1').modal('show', {backdrop: 'fade'});"
+                   class="btn  btn-single">新建</a>
+                <a href="#"
+                   id="options-segment-remove1"
+                   class="btn  btn-single">删除</a>
+            </div>
+        </div>
+
+        <table class="table table-striped" id="options_segment1">
+            <thead>
+            <tr>
+                <th data-field="state" data-checkbox="true"></th>
+                <th data-field="description" data-valign="middle" data-falign="center" data-visible="false"></th>
+                <th data-field="options" data-valign="middle" data-falign="center" data-editable="true">答案区间</th>
+                <th data-field="qid" data-visible="false"></th>
+                <th data-field="tid" data-visible="false"></th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel panel-default hospital_table" style="display: block">
+        <div class="panel-heading">
+            <h3 class="panel-title">填报统计-信息化投入比</h3>
+        </div>
+        <table class="table-striped table-bordered table-hover table-detail " id="extra1">
+        </table>
+    </div>
+    <div class="panel panel-default segment_table">
+        <div class="panel-heading">
+            <h3 class="panel-title">实有人床位数比统计区间</h3>
+            <div class="panel-options">
+                <a href="javascript:;"
+                   onclick="jQuery('#modal-options-segment2').modal('show', {backdrop: 'fade'});"
+                   class="btn  btn-single">新建</a>
+                <a href="#"
+                   id="options-segment-remove2"
+                   class="btn  btn-single">删除</a>
+            </div>
+        </div>
+
+        <table class="table table-striped" id="options_segment2">
+            <thead>
+            <tr>
+                <th data-field="state" data-checkbox="true"></th>
+                <th data-field="description" data-valign="middle" data-falign="center" data-visible="false"></th>
+                <th data-field="options" data-valign="middle" data-falign="center" data-editable="true">答案区间</th>
+                <th data-field="qid" data-visible="false"></th>
+                <th data-field="tid" data-visible="false"></th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel panel-default hospital_table" style="display: block">
+        <div class="panel-heading">
+            <h3 class="panel-title">填报统计-实有人床位数比</h3>
+        </div>
+        <table class="table-striped table-bordered table-hover table-detail " id="extra2">
+        </table>
+    </div>
+    <div class="panel panel-default segment_table">
+        <div class="panel-heading">
+            <h3 class="panel-title">实有人编制数比统计区间</h3>
+            <div class="panel-options">
+                <a href="javascript:;"
+                   onclick="jQuery('#modal-options-segment3').modal('show', {backdrop: 'fade'});"
+                   class="btn  btn-single">新建</a>
+                <a href="#"
+                   id="options-segment-remove3"
+                   class="btn  btn-single">删除</a>
+            </div>
+        </div>
+
+        <table class="table table-striped" id="options_segment3">
+            <thead>
+            <tr>
+                <th data-field="state" data-checkbox="true"></th>
+                <th data-field="description" data-valign="middle" data-falign="center" data-visible="false"></th>
+                <th data-field="options" data-valign="middle" data-falign="center" data-editable="true">答案区间</th>
+                <th data-field="qid" data-visible="false"></th>
+                <th data-field="tid" data-visible="false"></th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel panel-default hospital_table" style="display: block">
+        <div class="panel-heading">
+            <h3 class="panel-title">填报统计-实有人编制人数比</h3>
+        </div>
+        <table class="table-striped table-bordered table-hover table-detail " id="extra3">
+        </table>
+    </div>
+{% endblock %}
+{% block modal %}
+    <div class="modal fade" id="modal-options-segment1">
+        <div class="modal-dialog" style="width: 60%;" id="contact_dialog">
+            <form class="modal-content" name="options_segment" id="segment1"
+                  action="{% url 'dashboard:create_options_description' %}">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">新建数字划分区间</h4>
+                    <h6 class="modal-title">数字类型，使用"；"(英文半角)分割</h6>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type=hidden name="qid" value='hospital'>
+                                <input type=hidden name="tid" value=1311>
+                                <label for="field-1" class="control-label">信息化投入比<br></label>
+                                <input type=hidden name="description" value="segment">
+                                <input type="text" class="form-control" placeholder="10；20；40" name="options">
+                            </div>
+                            <script type="text/javascript">
+                                jQuery(document).ready(function ($) {
+                                    $("#multi-select").multiSelect({
+                                        afterInit: function () {
+                                            // Add alternative scrollbar to list
+                                            this.$selectableContainer.add(this.$selectionContainer).find('.ms-list').perfectScrollbar();
+                                        },
+                                        afterSelect: function () {
+                                            // Update scrollbar size
+                                            this.$selectableContainer.add(this.$selectionContainer).find('.ms-list').perfectScrollbar('update');
+                                        }
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal" id="cancel">取消</button>
+                    <input type="button" class="btn btn-info" id="submitForm_segment1" value="创建"/>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+    <div class="modal fade" id="modal-options-segment2">
+        <div class="modal-dialog" style="width: 60%;" id="contact_dialog">
+            <form class="modal-content" name="options_segment" id="segment2"
+                  action="{% url 'dashboard:create_options_description' %}">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">新建数字划分区间</h4>
+                    <h6 class="modal-title">数字类型，使用"；"(英文半角)分割</h6>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type=hidden name="qid" value='hospital'>
+                                <input type=hidden name="tid" value='1906'>
+                                <label for="field-1" class="control-label">实有人床位数比<br></label>
+                                <input type=hidden name="description" value="segment">
+                                <input type="text" class="form-control" placeholder="10；20；40" name="options">
+                            </div>
+                            <script type="text/javascript">
+                                jQuery(document).ready(function ($) {
+                                    $("#multi-select").multiSelect({
+                                        afterInit: function () {
+                                            // Add alternative scrollbar to list
+                                            this.$selectableContainer.add(this.$selectionContainer).find('.ms-list').perfectScrollbar();
+                                        },
+                                        afterSelect: function () {
+                                            // Update scrollbar size
+                                            this.$selectableContainer.add(this.$selectionContainer).find('.ms-list').perfectScrollbar('update');
+                                        }
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal" id="cancel">取消</button>
+                    <input type="button" class="btn btn-info" id="submitForm_segment2" value="创建"/>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+    <div class="modal fade" id="modal-options-segment3">
+        <div class="modal-dialog" style="width: 60%;" id="contact_dialog">
+            <form class="modal-content" name="options_segment" id="segment3"
+                  action="{% url 'dashboard:create_options_description' %}">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">新建数字划分区间</h4>
+                    <h6 class="modal-title">数字类型，使用"；"(英文半角)分割</h6>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type=hidden name="qid" value='location'>
+                                <input type=hidden name="tid" value='1110'>
+                                <label for="field-1" class="control-label">实有人编制数比<br></label>
+                                <input type=hidden name="description" value="segment">
+                                <input type="text" class="form-control" placeholder="10；20；40" name="options">
+                            </div>
+                            <script type="text/javascript">
+                                jQuery(document).ready(function ($) {
+                                    $("#multi-select").multiSelect({
+                                        afterInit: function () {
+                                            // Add alternative scrollbar to list
+                                            this.$selectableContainer.add(this.$selectionContainer).find('.ms-list').perfectScrollbar();
+                                        },
+                                        afterSelect: function () {
+                                            // Update scrollbar size
+                                            this.$selectableContainer.add(this.$selectionContainer).find('.ms-list').perfectScrollbar('update');
+                                        }
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal" id="cancel">取消</button>
+                    <input type="button" class="btn btn-info" id="submitForm_segment3" value="创建"/>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+
+
+    <script src="{% static "js/custom/bootstrap-table.min.js" %}"></script>
+    <script src="{% static "js/custom/bootstrap-table-editable.min.js" %}"></script>
+    <script src="{% static "js/custom/bootstrap-editable.min.js" %}"></script>
+    <script src="{% static "js/custom/bootstrap-table-export.js" %}"></script>
+    <script src="{% static "js/custom/tableExport.js" %}"></script>
+    <script src="{% static "js/custom/bootstrap-table-zh-CN.js" %}"></script>
+    <script src="{% static 'js/custom/detail.js' %}"></script>
+    <script src="{% static 'js/multiselect/js/jquery.multi-select.js' %}"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#segment1").on("submit", function (e) {
+                var postData = $(this).serializeArray();
+                var formURL = $(this).attr("action");
+                $.ajax({
+                    url: formURL,
+                    type: "POST",
+                    data: postData,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $('#modal-options-segment1').modal('hide');
+{#                        console.log('------------success');#}
+{#                        // $('#create_message_success').modal('show');#}
+                        window.location.reload();
+
+                    },
+                    error: function (jqXHR, status, error) {
+                        $('#modal-options-segment1').modal('hide');
+
+                    }
+                });
+                e.preventDefault();
+            });
+            $("#segment2").on("submit", function (e) {
+                var postData = $(this).serializeArray();
+                var formURL = $(this).attr("action");
+                $.ajax({
+                    url: formURL,
+                    type: "POST",
+                    data: postData,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $('#modal-options-segment2').modal('hide');
+                        // $('#create_message_success').modal('show');
+                        window.location.reload();
+
+                    },
+                    error: function (jqXHR, status, error) {
+                        $('#modal-options-segment2').modal('hide');
+
+                    }
+                });
+                e.preventDefault();
+            });
+            $("#segment3").on("submit", function (e) {
+                var postData = $(this).serializeArray();
+                var formURL = $(this).attr("action");
+                $.ajax({
+                    url: formURL,
+                    type: "POST",
+                    data: postData,
+                    success: function (data, textStatus, jqXHR) {
+
+                        $('#modal-options-segment3').modal('hide');
+                        // $('#create_message_success').modal('show');
+                        window.location.reload();
+
+                    },
+                    error: function (jqXHR, status, error) {
+                        $('#modal-options-segment3').modal('hide');
+
+                    }
+                });
+                e.preventDefault();
+            });
+
+            $("#submitForm_segment1").on('click', function () {
+                console.log('submitForm_segment1 processing');
+                $("#segment1").submit();
+
+            });
+            $("#submitForm_segment2").on('click', function () {
+                console.log('submitForm_segment2 processing');
+                $("#segment2").submit();
+            });
+            $("#submitForm_segment3").on('click', function () {
+                console.log('submitForm_segment2 processing');
+                $("#segment3").submit();
+            });
+        });
+
+        {% autoescape off %}
+            var extra2 = {
+                selector: '#extra2',
+                showExport: true,
+                qid: "hospital",
+                helper:'区间/统计量',
+                tid:1906,
+                url: "{% url 'dashboard:stat_extra_rate' %}"
+            };
+            var extra3 = {
+                selector: '#extra3',
+                showExport: true,
+                qid: "location",
+                 helper:'区间/统计量',
+                tid:1110,
+                url: "{% url 'dashboard:stat_extra_rate_health' %}"
+            };
+            var extra1 = {
+                selector: '#extra1',
+                showExport: true,
+                qid: "hospital",
+                 helper:'区间/统计量',
+                tid: 1311,
+                url: "{% url 'dashboard:stat_extra_rate' %}"
+            };
+            var segment1 = {
+                selector: "#options_segment1",
+                data:{{ options_description_h1311 }},
+                url: "{% url 'dashboard:update_options_segment' %}"
+            };
+            var segment2 = {
+                selector: "#options_segment2",
+                data:{{ options_description_h1906 }},
+                url: "{% url 'dashboard:update_options_segment' %}"
+            };
+            var segment3 = {
+                selector: "#options_segment3",
+                data:{{ options_description_l1110 }},
+                url: "{% url 'dashboard:update_options_segment' %}"
+            };
+        {% endautoescape %}
+        init_hospital_stat_table(extra1);
+        init_hospital_stat_table(extra2);
+        init_health_stat_table(extra3);
+        init_update_table(segment1);
+        init_update_table(segment2);
+        init_update_table(segment3);
+        var remove_segment1 = {
+            button: '#options-segment-remove1',
+            table: "#options_segment1",
+            url: "{% url 'dashboard:delete_options_description' %}"
+        };
+        remove_record_in_table(remove_segment1);
+        var remove_segment2 = {
+            button: '#options-segment-remove2',
+            table: "#options_segment2",
+            url: "{% url 'dashboard:delete_options_description' %}"
+        };
+        remove_record_in_table(remove_segment2);
+         var remove_segment3 = {
+            button: '#options-segment-remove3',
+            table: "#options_segment3",
+            url: "{% url 'dashboard:delete_options_description' %}"
+        };
+        remove_record_in_table(remove_segment2);
+    </script>
+
+{% endblock %}
